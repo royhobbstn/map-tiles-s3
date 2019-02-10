@@ -1,0 +1,15 @@
+{
+  "Version": "2012-10-17",
+  "Id": "Policy1514682206318",
+  "Statement": [
+    {
+      "Sid": "Stmt1514682202401",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "*"
+      },
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::faf-tiles/*"
+    }
+  ]
+}

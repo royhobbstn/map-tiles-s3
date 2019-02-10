@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Display a map</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+<div id='map'></div>
+
+<script>
+
+    // Please put your own Mapbox Access Token here.
+    // I'll probably be rotating this occasionally, so if you accidentally
+    // use my token, your application might stop working in the future.
+  mapboxgl.accessToken = "pk.eyJ1IjoibWFwdXRvcGlhIiwiYSI6ImNqYXZlbmZrYTA4YWQzM3M3MXk2ODZpNWkifQ.fAXuq4zQWA3BIo1_hJUIBw";
+
+  var map = new mapboxgl.Map({
+    container: 'map', // container id
+    style: 'mapbox://styles/mapbox/dark-v9',
+    center: [-74.50, 40],
+    zoom: 6
+  });
+
+  map.on('load', function() {
+
+    window.map.addSource('tiles', {
+      "type": "vector",
+      "minzoom": 0,
+      "maxzoom": 9,
+      "tiles": [`https://d1nwk4zr2blzen.cloudfront.net/{z}/{x}/{y}.pbf`, `https://d34p6bbsme5fb1.cloudfront.net/{z}/{x}/{y}.pbf`]
+    });
+
+
+    map.addLayer({
+      "id": "test",
+      "type": "line",
+      "source": "tiles",
+      "source-layer": "network",
+      "paint": {
+        "line-color": "cyan",
+        "line-width": 0.4
+      }
+    });
+  });
+
+</script>
+
+</body>
+</html>
